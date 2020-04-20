@@ -75,7 +75,7 @@ router.patch("/tasks/:id", auth, async (req, res) => {
   const _id = req.params.id;
   const updates = Object.keys(req.body);
   const allowedUpdates = ["description", "completed"];
-  const isValidOperation = updates.every(update =>
+  const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update)
   );
 
@@ -90,7 +90,7 @@ router.patch("/tasks/:id", auth, async (req, res) => {
       res.status(404).send();
     }
 
-    updates.forEach(update => (task[update] = req.body[update]));
+    updates.forEach((update) => (task[update] = req.body[update]));
     await task.save();
 
     res.send(task);
