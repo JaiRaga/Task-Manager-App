@@ -1,11 +1,15 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
+const db = require("../../config/keys").mongoURI;
 
-mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api', {
+mongoose
+  .connect(db, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
     useFindAndModify: false
-})
-
-
-
+  })
+  .then(() => console.log("Connected to Atlas"))
+  .catch((err) => {
+    console.log(err.message);
+    process.exit(1);
+  });
