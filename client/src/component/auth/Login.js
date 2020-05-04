@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const Login = (props) => {
@@ -17,7 +18,7 @@ const Login = (props) => {
         <a href='#'>Forgot Password</a>
       </div>
       <p>
-        Need an account? <a href='#'>Sign Up</a>
+        Need an account? <Link to='/register'>Sign Up</Link>
       </p>
     </div>
   );
