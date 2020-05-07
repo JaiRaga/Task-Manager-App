@@ -6,3 +6,4 @@ export const REGISTER_FAILURE = "REGISTER_FAILURE";
 export const LOGOUT = "LOGOUT";
 export const LOGOUT_ALL = "LOGOUT_ALL";
 export const USER_LOADED = "USER_LOADED";
+export const CLEAR_PROFILE = "CLEAR_PROFILE";
