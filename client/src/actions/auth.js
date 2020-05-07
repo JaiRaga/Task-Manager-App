@@ -7,7 +7,8 @@ import {
   LOGIN_FAILURE,
   LOGOUT,
   LOGOUT_ALL,
-  USER_LOADED
+  USER_LOADED,
+  CLEAR_PROFILE
 } from "../actions/types";
 import setAuthToken from "../utils/setAuthToken";
 
@@ -56,6 +57,32 @@ export const register = ({ name, email, password }) => async (dispatch) => {
 };
 
 // LOGIN
+export const login = ({ email, password }) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  const body = JSON.stringify({ email, password });
+
+  try {
+    const res = await axios.post("/api/users/login", body, config);
+    console.log(res);
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: res.data
+    });
+
+    dispatch(loadUser());
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 // LOGOUT
+export const logout = () => (dispatch) => {
+  dispatch({ type: CLEAR_PROFILE });
+  dispatch({ type: LOGOUT });
+};
 // LOGOUT ALL
