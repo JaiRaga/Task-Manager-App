@@ -1,26 +1,33 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { updateTask } from "../../actions/task";
+import { updateTask, loadTask } from "../../actions/task";
 import { useDispatch } from "react-redux";
-import { loadTask } from "../../actions/task";
+import UpdateTask from "./UpdateTask";
 
 const Task = ({ description, completed: done, taskId }) => {
-  const [complete, setComplete] = useState(done);
+  let [complete, setComplete] = useState(done);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const dispatch = useDispatch();
-  let completed = done ? "Completed" : "Pending";
+
+  const onClick = () => {
+    setComplete(true);
+  };
 
   useEffect(() => {
-    completed = done ? "Completed" : "Pending";
-  });
-
-  const onComplete = () => {
-    setComplete(!done);
-    dispatch(updateTask(null, complete, taskId));
-  };
+    // console.log(complete);
+    if (complete) {
+      dispatch(updateTask(null, complete, taskId));
+    }
+  }, []);
 
   return (
     <Fragment>
-      <h5>{description}</h5>
-      <button onClick={onComplete}>{completed}</button>
+      <h5 onClick={() => setModalIsOpen(true)}>{description}</h5>
+      <UpdateTask
+        id={taskId}
+        description={description}
+        modalIsOpen={modalIsOpen}
+      />
+      <button onClick={onClick}>{complete ? "Completed" : "Pending"}</button>
     </Fragment>
   );
 };
