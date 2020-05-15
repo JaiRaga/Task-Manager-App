@@ -1,9 +1,10 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Task from "./Task";
 
 const Tasks = () => {
   const tasks = useSelector((state) => state.task.tasks);
+
   return (
     <Fragment>
       {tasks.map((task) => (
