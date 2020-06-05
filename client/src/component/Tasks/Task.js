@@ -8,16 +8,12 @@ const Task = ({ description, completed: done, taskId }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const dispatch = useDispatch();
 
-  const onClick = () => {
-    setComplete(true);
-  };
-
   useEffect(() => {
     // console.log(complete);
     if (complete) {
       dispatch(updateTask(null, complete, taskId));
     }
-  }, []);
+  }, [complete]);
 
   return (
     <Fragment>
@@ -27,7 +23,9 @@ const Task = ({ description, completed: done, taskId }) => {
         description={description}
         modalIsOpen={modalIsOpen}
       />
-      <button onClick={onClick}>{complete ? "Completed" : "Pending"}</button>
+      <button onClick={() => setComplete(true)}>
+        {complete ? "Completed" : "Pending"}
+      </button>
     </Fragment>
   );
 };
