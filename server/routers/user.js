@@ -91,10 +91,12 @@ router.post(
 );
 
 // Read endpoint
+// GET current user profile
 router.get("/users/me", auth, async (req, res) => {
   res.send(req.user);
 });
 
+// GET user by id
 router.get("/users/:id", async (req, res) => {
   const _id = req.params.id;
 
@@ -109,6 +111,7 @@ router.get("/users/:id", async (req, res) => {
   }
 });
 
+// Open user avatar to fit the screen
 router.get("/users/:id/avatar", async (req, res) => {
   try {
     const user = await User.findById("5de49fe42daa2e0c74f2a9ef");
